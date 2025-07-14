@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: miapastas_dev
+      POSTGRES_USER: miapastas_user
+      POSTGRES_PASSWORD: desarrollo123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - miapastas_network
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=miapastas_dev
+      - DB_USER=miapastas_user
+      - DB_PASSWORD=desarrollo123
+      - DEBUG=True
+    networks:
+      - miapastas_network
+
+  # Opcional: Redis para caching (preparado para futuras mejoras)
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - miapastas_network
+
+volumes:
+  postgres_data:
+
+networks:
+  miapastas_network:
+    driver: bridge

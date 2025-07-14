@@ -1,0 +1,80 @@
+import os
+
+# Base directory del proyecto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Configuración de base de datos para desarrollo
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'miapastas_dev',
+        'USER': 'miapastas_user',
+        'PASSWORD': 'desarrollo123',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+# Configuración de desarrollo
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Configuración de email para desarrollo (logs en consola)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Configuración de archivos estáticos
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'estaticos'),
+]
+
+# Configuración de media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Secret key para desarrollo (cambiar en producción)
+SECRET_KEY = 'dev-secret-key-cambiar-en-produccion'
+
+# Configuración de logging para desarrollo
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'debug.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'recetas': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+# Crear directorio de logs si no existe
+os.makedirs(os.path.join(BASE_DIR, 'logs'), exist_ok=True)
