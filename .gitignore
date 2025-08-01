@@ -1,7 +1,108 @@
-*.py[co]
-.idea/
-__pycache__
-*.sqlite3*
-*.orig
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Django
+*.log
+local_settings.py
 miapastas/local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+
+# Environment variables
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Backups
+*.bak
+*.backup
+*.sql
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Docker
+docker-compose.override.yml
+
+# Database
+*.db
+*.sqlite
+*.sqlite3*
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Node.js (si se usa en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos específicos del proyecto
+cd
+pip
+python
+datos_bd.json
+respaldo_usuarios.json
+usar_respaldos.txt
+check
+a.png
+
+# Migraciones específicas que pueden causar conflictos
+*.orig
 recetas/migrations/0016_auto_20151216_1516.py
